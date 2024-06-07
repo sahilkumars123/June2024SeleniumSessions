@@ -16,6 +16,8 @@ public class LaunchBrowser {
 		
 		driver.get("https://www.google.com");
 		
+		String pageSource = driver.getPageSource();
+		
 		String actualTitle = driver.getTitle();
 		
 		System.out.println("title is :: "+actualTitle);

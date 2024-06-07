@@ -9,7 +9,7 @@ public class BrowserUtil {
 
 	WebDriver driver;
 
-	public void launchBrowser(String browserName) {
+	public WebDriver launchBrowser(String browserName) {
 		
 		if(browserName == null) {
 			System.out.println("BROWSER CANNOT BE NULL");
@@ -28,6 +28,8 @@ public class BrowserUtil {
 		default:
 			System.out.println("Please enter the valid browser name:: "+browserName);
 		}
+		
+		return driver;
 	}
 	
 	public void enterURL(String url) {
