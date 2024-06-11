@@ -32,7 +32,7 @@ public class LocatorConcept {
 //	password.sendKeys("sahil@123");
 	
 	
-	//3.
+	//3. BY locator approach
 //		By userID = By.id("input-email");
 //		By password = By.id("input-password");
 //		
