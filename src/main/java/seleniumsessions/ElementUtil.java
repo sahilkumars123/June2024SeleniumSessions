@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import FrameworkException.FrameworkException;
 
@@ -91,7 +92,7 @@ public class ElementUtil {
 		return element;
 	}
 
-	public  void clickOnElement(By locator, String lang) {
+	public void clickOnElement(By locator, String lang) {
 
 		List<WebElement> langLinks = getElements(locator);
 
@@ -103,6 +104,58 @@ public class ElementUtil {
 				break;
 			}
 		}
+	}
+
+	// **************DropDownUtils************************************//
+
+	public void doSelectByIndex(By locator, int index) {
+
+		if (index < 1) {
+			System.out.println("please pass the (+ve) index");
+			return;
+		}
+
+		Select select = new Select(getElement(locator));
+		select.selectByIndex(index);
+	}
+
+	public void doSelectByVisibleText(By locator, String text) {
+
+		if (text == null) {
+			System.out.println("please pass the valid text");
+			return;
+		}
+
+		Select select = new Select(getElement(locator));
+		select.selectByVisibleText(text);
+	}
+
+	public void doSelectByValue(By locator, String value) {
+
+		if (value == null) {
+			System.out.println("please pass the correct value");
+			return;
+		}
+
+		Select select = new Select(getElement(locator));
+		select.selectByValue(value);
+	}
+	
+	public int getDropDownOptionsCount(By locator) {
+		Select select = new Select(getElement(locator));
+		return select.getOptions().size();
+	}
+	
+	public List<String> getDropDownTextList(By locator) {
+		Select select = new Select(getElement(locator));
+	 List<WebElement> optionsList = select.getOptions();
+	 List<String> optionsTextList = new ArrayList<String>();
+	 
+	 for(WebElement e: optionsList) {
+		 String text = e.getText();
+		 optionsTextList.add(text);
+	 }
+		return optionsTextList;
 	}
 
 }
