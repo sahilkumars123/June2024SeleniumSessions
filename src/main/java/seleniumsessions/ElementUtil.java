@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import FrameworkException.FrameworkException;
@@ -157,5 +158,46 @@ public class ElementUtil {
 	 }
 		return optionsTextList;
 	}
+	
+	
+	//*************Actions Util *************************//
+	
+	public void moveToElement(By locator) {
+		Actions act = new Actions(driver);
+		act.moveToElement(getElement(locator)).build().perform();
+	}
+	
+	public  void doActionsClick(By locator) {
+		Actions act = new Actions(driver);
+		act.click(getElement(locator)).perform();
+	}
+	
+	public  void doActionsSendKeys(By locator) {
+		Actions act = new Actions(driver);
+		act.sendKeys(getElement(locator)).perform();
+	}
+	
+	public  WebElement getElementByText(String text) {
+		return driver.findElement(By.linkText(text));
+	}
+	
+	
+	public void multiLevelMenuHandling(By level1locator, String level2locator, String level3locator,
+			String level4locator) throws InterruptedException {
+
+		Actions act = new Actions(driver);
+		act.moveToElement(getElement(level1locator)).click().perform();
+		Thread.sleep(1500);
+
+		act.moveToElement(getElementByText(level2locator)).perform();
+		Thread.sleep(1500);
+
+		act.moveToElement(getElementByText(level3locator)).perform();
+		Thread.sleep(1500);
+
+		act.click(getElementByText(level4locator)).perform();
+	}
+	
+	
 
 }
